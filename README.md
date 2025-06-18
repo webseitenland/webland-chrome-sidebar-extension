@@ -24,7 +24,7 @@ Eine moderne Chrome-Sidebar-Extension mit nützlichen Features für den täglich
 
 1. Lade das Repository herunter oder klone es:
    ```
-   git clone https://github.com/username/webland-chrome-sidebar-extension.git
+   git clone https://github.com/webseitenland/webland-chrome-sidebar-extension.git
    ```
 
 2. Öffne Chrome und navigiere zu `chrome://extensions/`
@@ -67,14 +67,6 @@ Du kannst die Extension nach deinen Wünschen anpassen:
 - Ändere die Farbpalette in `css/sidebar.css` unter den `:root`-Variablen
 - Füge neue Features hinzu, indem du die HTML-Struktur erweiterst und entsprechende JavaScript-Funktionen implementierst
 - Passe die Icons an, indem du die Font Awesome-Klassen in der HTML-Datei änderst
-
-## Lizenz
-
-Dieses Projekt steht unter der MIT-Lizenz - siehe die [LICENSE](LICENSE) Datei für Details.
-
-## Autor
-
-Dein Name - [Deine Website](https://deinewebsite.de)
 
 ## Danksagungen
 
