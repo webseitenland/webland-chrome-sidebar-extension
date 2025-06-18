@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- This website was created with Webseitenland. === Webseitenland - https://webseitenland.de/ === -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webland Sidebar</title>
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Gruppo&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="sidebar-container">
+    <header class="sidebar-header">
+      <h1>Webland</h1>
+      <div class="theme-toggle">
+        <i class="fas fa-moon" id="theme-toggle-icon"></i>
+      </div>
+    </header>
+
+    <div class="search-container">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Suchen...">
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul class="feature-list">
+        <li class="feature-item active" data-feature="notes">
+          <i class="fas fa-sticky-note"></i>
+          <span>Notizen</span>
+        </li>
+        <li class="feature-item" data-feature="bookmarks">
+          <i class="fas fa-bookmark"></i>
+          <span>Lesezeichen</span>
+        </li>
+        <li class="feature-item" data-feature="todo">
+          <i class="fas fa-tasks"></i>
+          <span>Aufgaben</span>
+        </li>
+        <li class="feature-item" data-feature="weather">
+          <i class="fas fa-cloud-sun"></i>
+          <span>Wetter</span>
+        </li>
+        <li class="feature-item" data-feature="translate">
+          <i class="fas fa-language"></i>
+          <span>Übersetzer</span>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="feature-content">
+      <!-- notes feature -->
+      <div class="feature-panel active" id="notes-panel">
+        <h2>Meine Notizen</h2>
+        <div class="notes-container">
+          <div class="note-add">
+            <textarea id="new-note" placeholder="Neue Notiz schreiben..."></textarea>
+            <button id="save-note" class="btn-primary">
+              <i class="fas fa-save"></i>
+              <span>Speichern</span>
+            </button>
+          </div>
+          <div class="notes-list" id="notes-list">
+            <!-- notes will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- bookmarks feature -->
+      <div class="feature-panel" id="bookmarks-panel">
+        <h2>Meine Lesezeichen</h2>
+        <div class="bookmarks-container">
+          <button id="add-current-page" class="btn-primary">
+            <i class="fas fa-plus"></i>
+            <span>Aktuelle Seite hinzufügen</span>
+          </button>
+          <div class="bookmarks-list" id="bookmarks-list">
+            <!-- bookmarks will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- todo feature -->
+      <div class="feature-panel" id="todo-panel">
+        <h2>Meine Aufgaben</h2>
+        <div class="todo-container">
+          <div class="todo-add">
+            <input type="text" id="new-todo" placeholder="Neue Aufgabe...">
+            <button id="add-todo" class="btn-primary">
+              <i class="fas fa-plus"></i>
+              <span>Hinzufügen</span>
+            </button>
+          </div>
+          <ul class="todo-list" id="todo-list">
+            <!-- tasks will be dynamically inserted here -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- weather feature -->
+      <div class="feature-panel" id="weather-panel">
+        <h2>Wetter</h2>
+        <div class="weather-container">
+          <div class="weather-search">
+            <input type="text" id="weather-location" placeholder="Stadt eingeben...">
+            <button id="get-weather" class="btn-primary">
+              <i class="fas fa-search-location"></i>
+              <span>Suchen</span>
+            </button>
+          </div>
+          <div class="weather-info" id="weather-info">
+            <!-- weather information will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- translator feature -->
+      <div class="feature-panel" id="translate-panel">
+        <h2>Übersetzer</h2>
+        <div class="translate-container">
+          <div class="language-selector">
+            <select id="source-language">
+              <option value="auto">Automatisch erkennen</option>
+              <option value="de">Deutsch</option>
+              <option value="en">Englisch</option>
+              <option value="fr">Französisch</option>
+              <option value="es">Spanisch</option>
+            </select>
+            <i class="fas fa-exchange-alt"></i>
+            <select id="target-language">
+              <option value="en">Englisch</option>
+              <option value="de" selected>Deutsch</option>
+              <option value="fr">Französisch</option>
+              <option value="es">Spanisch</option>
+            </select>
+          </div>
+          <textarea id="source-text" placeholder="Text zum Übersetzen eingeben..."></textarea>
+          <button id="translate-btn" class="btn-primary">
+            <i class="fas fa-language"></i>
+            <span>Übersetzen</span>
+          </button>
+          <div class="translated-text" id="translated-text">
+            <!-- translated text will be displayed here -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="sidebar-footer">
+      <p>© <span id="current-year"></span> Webland</p>
+      <div class="social-links">
+        <a href="https://github.com/webseitenland" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="src/sidebar.js"></script>
+</body>
+
+</html>
