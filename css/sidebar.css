@@ -22,6 +22,9 @@
   --padding-medium: 1rem;
   --padding-small: 0.75rem;
   --padding-xs: 0.5rem;
+  --crypto-positive: #16c784;
+  --crypto-negative: #ea3943;
+  --crypto-neutral: #a6b0c3;
 }
 
 [data-theme="dark"] {
@@ -35,6 +38,9 @@
   --card-bg: #2a2a2a;
   --header-bg: #252525;
   --shadow-color: rgba(0, 0, 0, 0.25);
+  --crypto-positive: #16a34a;
+  --crypto-negative: #dc2626;
+  --crypto-neutral: #6b7280;
 }
 
 * {
@@ -867,4 +873,889 @@ body {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
+}
+
+/* crypto feature styles */
+.crypto-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.crypto-tabs {
+  display: flex;
+  gap: clamp(0.3rem, 1vw, 0.5rem);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: clamp(0.5rem, 2vw, 0.75rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.crypto-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.crypto-tab {
+  background: none;
+  border: none;
+  padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--secondary-color);
+  transition: var(--transition);
+  white-space: nowrap;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+}
+
+.crypto-tab:hover {
+  background-color: rgba(205, 93, 10, 0.1);
+  color: var(--primary-color);
+}
+
+.crypto-tab.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.crypto-content {
+  position: relative;
+}
+
+.crypto-tab-content {
+  display: none;
+}
+
+.crypto-tab-content.active {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Watchlist Tab */
+.crypto-search {
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  margin-bottom: clamp(1rem, 3vw, 1.25rem);
+}
+
+.crypto-search input {
+  flex: 1;
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.crypto-search input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.crypto-item {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.crypto-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.crypto-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crypto-item-name {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.crypto-item-name img {
+  width: clamp(24px, 6vw, 28px);
+  height: clamp(24px, 6vw, 28px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.crypto-item-price {
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+}
+
+.crypto-item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  color: var(--secondary-color);
+}
+
+.crypto-item-change {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  border-radius: 100px;
+  padding: clamp(0.2rem, 1vw, 0.3rem) clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.crypto-item-change.positive {
+  color: var(--crypto-positive);
+  background-color: rgba(22, 199, 132, 0.1);
+}
+
+.crypto-item-change.negative {
+  color: var(--crypto-negative);
+  background-color: rgba(234, 57, 67, 0.1);
+}
+
+.crypto-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.crypto-item-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(28px, 8vw, 32px);
+  height: clamp(28px, 8vw, 32px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crypto-item-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(205, 93, 10, 0.1);
+}
+
+.crypto-item-actions button.delete:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Notes Tab */
+.crypto-note-add {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  margin-bottom: clamp(1rem, 3vw, 1.25rem);
+}
+
+.crypto-note-add textarea {
+  width: 100%;
+  height: clamp(80px, 20vh, 100px);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  resize: none;
+  font-family: inherit;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.crypto-note-add textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.crypto-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.crypto-note-item {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(1rem, 3vw, 1.25rem);
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: var(--transition);
+  word-break: break-word;
+}
+
+.crypto-note-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.crypto-note-item .note-content {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.crypto-note-item .note-date {
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  color: var(--secondary-color);
+  margin-bottom: 0.75rem;
+}
+
+.crypto-note-item .note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  margin-top: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.crypto-note-item .note-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(28px, 8vw, 32px);
+  height: clamp(28px, 8vw, 32px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crypto-note-item .note-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(205, 93, 10, 0.1);
+}
+
+.crypto-note-item .note-actions button.delete:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Links Tab */
+.crypto-link-add {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  margin-bottom: clamp(1rem, 3vw, 1.25rem);
+}
+
+.crypto-link-add input {
+  width: 100%;
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.crypto-link-add input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.crypto-link-add .btn-secondary {
+  margin-top: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+.crypto-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.crypto-link-item {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1rem);
+}
+
+.crypto-link-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.crypto-link-item .favicon {
+  width: clamp(20px, 5vw, 24px);
+  height: clamp(20px, 5vw, 24px);
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.crypto-link-item .link-title {
+  flex: 1;
+  font-weight: 500;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.crypto-link-item .link-actions {
+  display: flex;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.crypto-link-item .link-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(28px, 8vw, 32px);
+  height: clamp(28px, 8vw, 32px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crypto-link-item .link-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(205, 93, 10, 0.1);
+}
+
+.crypto-link-item .link-actions button.delete:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Calculator Tab */
+.crypto-calculator {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.calculator-row {
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.calculator-row input {
+  flex: 1;
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.calculator-row input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.calculator-row select {
+  flex: 1;
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right clamp(0.75rem, 2vw, 1rem) center;
+  background-size: 1em;
+}
+
+.calculator-row select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.calculator-result {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(1rem, 3vw, 1.25rem);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-label {
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+}
+
+.result-value {
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+  color: var(--primary-color);
+}
+
+.calculator-actions {
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.saved-calculations {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  margin-top: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.saved-calculation {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: var(--transition);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saved-calculation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.saved-calculation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.saved-calculation-title {
+  font-weight: 600;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.saved-calculation-info {
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  color: var(--secondary-color);
+}
+
+.saved-calculation-value {
+  font-weight: 700;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  color: var(--primary-color);
+}
+
+.saved-calculation-actions {
+  display: flex;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.saved-calculation-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(28px, 8vw, 32px);
+  height: clamp(28px, 8vw, 32px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saved-calculation-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(205, 93, 10, 0.1);
+}
+
+.saved-calculation-actions button.delete:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* button styles */
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(1.2rem, 3vw, 1.5rem);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.btn-secondary:active {
+  transform: translateY(-1px);
+}
+
+/* Portfolio Tab */
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(1rem, 3vw, 1.25rem);
+}
+
+.portfolio-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.total-label {
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  color: var(--secondary-color);
+}
+
+.total-value {
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.2rem);
+  color: var(--primary-color);
+}
+
+.portfolio-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.portfolio-item {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: var(--transition);
+}
+
+.portfolio-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.portfolio-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.portfolio-item-name {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.portfolio-item-name img {
+  width: clamp(24px, 6vw, 28px);
+  height: clamp(24px, 6vw, 28px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.portfolio-item-amount {
+  font-weight: 500;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.portfolio-item-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.portfolio-item-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-label {
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  color: var(--secondary-color);
+}
+
+.detail-value {
+  font-weight: 600;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.portfolio-item-profit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: clamp(0.5rem, 1.5vw, 0.75rem);
+  border-top: 1px solid var(--border-color);
+}
+
+.profit-label {
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  color: var(--secondary-color);
+}
+
+.profit-value {
+  font-weight: 700;
+  border-radius: 100px;
+  padding: clamp(0.2rem, 1vw, 0.3rem) clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.profit-value.positive {
+  color: var(--crypto-positive);
+  background-color: rgba(22, 199, 132, 0.1);
+}
+
+.profit-value.negative {
+  color: var(--crypto-negative);
+  background-color: rgba(234, 57, 67, 0.1);
+}
+
+.portfolio-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  margin-top: clamp(0.75rem, 2vw, 1rem);
+}
+
+.portfolio-item-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(28px, 8vw, 32px);
+  height: clamp(28px, 8vw, 32px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-item-actions button:hover {
+  color: var(--primary-color);
+  background-color: rgba(205, 93, 10, 0.1);
+}
+
+.portfolio-item-actions button.delete:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.portfolio-chart-container {
+  height: 200px;
+  margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Portfolio modal */
+.portfolio-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-modal.active {
+  display: flex;
+}
+
+.portfolio-modal-content {
+  background-color: var(--background-color);
+  border-radius: var(--card-border-radius);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.portfolio-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(1rem, 3vw, 1.25rem);
+}
+
+.portfolio-modal-title {
+  font-weight: 700;
+  font-size: clamp(1.1rem, 3vw, 1.2rem);
+}
+
+.portfolio-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(1.1rem, 3vw, 1.2rem);
+  color: var(--secondary-color);
+  transition: var(--transition);
+  width: clamp(32px, 8vw, 36px);
+  height: clamp(32px, 8vw, 36px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-modal-close:hover {
+  color: var(--danger-color);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.portfolio-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.25rem);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+
+.form-group input,
+.form-group select {
+  padding: clamp(0.7rem, 2vw, 0.875rem) clamp(0.75rem, 2vw, 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(205, 93, 10, 0.15);
+}
+
+.portfolio-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(0.75rem, 2vw, 1rem);
+  margin-top: clamp(1rem, 3vw, 1.25rem);
+}
+
+/* Portfolio distribution */
+.portfolio-distribution {
+  margin-top: 1rem;
+}
+
+.portfolio-distribution h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 3vw, 1.05rem);
+}
+
+.distribution-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.distribution-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.distribution-label {
+  font-size: clamp(0.85rem, 2.5vw, 0.9rem);
+  font-weight: 500;
+}
+
+.distribution-bar-container {
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.distribution-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.distribution-value {
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  color: var(--secondary-color);
+  text-align: right;
+}
+
+/* Empty state */
+.empty-state {
+  padding: clamp(1.5rem, 4vw, 2rem);
+  text-align: center;
+  color: var(--secondary-color);
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  line-height: 1.5;
 } 

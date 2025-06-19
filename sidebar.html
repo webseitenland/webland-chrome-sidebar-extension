@@ -50,6 +50,10 @@
           <i class="fas fa-language"></i>
           <span>Übersetzer</span>
         </li>
+        <li class="feature-item" data-feature="crypto">
+          <i class="fab fa-bitcoin"></i>
+          <span>Krypto</span>
+        </li>
       </ul>
     </nav>
 
@@ -149,6 +153,132 @@
           </div>
         </div>
       </div>
+
+      <!-- crypto feature -->
+      <div class="feature-panel" id="crypto-panel">
+        <h2>Krypto Handel</h2>
+        <div class="crypto-container">
+          <div class="crypto-tabs">
+            <button class="crypto-tab active" data-tab="watchlist">Watchlist</button>
+            <button class="crypto-tab" data-tab="portfolio">Portfolio</button>
+            <button class="crypto-tab" data-tab="notes">Notizen</button>
+            <button class="crypto-tab" data-tab="links">Links</button>
+            <button class="crypto-tab" data-tab="calculator">Rechner</button>
+          </div>
+          
+          <div class="crypto-content">
+            <!-- Watchlist Tab -->
+            <div class="crypto-tab-content active" id="watchlist-content">
+              <div class="crypto-search">
+                <input type="text" id="crypto-search" placeholder="Kryptowährung suchen...">
+                <button id="add-crypto" class="btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>Hinzufügen</span>
+                </button>
+              </div>
+              <div class="crypto-list" id="crypto-watchlist">
+                <!-- crypto items will be dynamically inserted here -->
+              </div>
+            </div>
+            
+            <!-- Portfolio Tab -->
+            <div class="crypto-tab-content" id="portfolio-content">
+              <div class="portfolio-header">
+                <div class="portfolio-total">
+                  <div class="total-label">Gesamtwert:</div>
+                  <div class="total-value" id="portfolio-total-value">0.00 €</div>
+                </div>
+                <button id="add-portfolio-item" class="btn-primary">
+                  <i class="fas fa-plus"></i>
+                  <span>Position hinzufügen</span>
+                </button>
+              </div>
+              <div class="portfolio-list" id="crypto-portfolio">
+                <!-- portfolio items will be dynamically inserted here -->
+              </div>
+              <div class="portfolio-chart-container">
+                <canvas id="portfolio-chart"></canvas>
+              </div>
+            </div>
+            
+            <!-- Notes Tab -->
+            <div class="crypto-tab-content" id="notes-content">
+              <div class="crypto-note-add">
+                <textarea id="new-crypto-note" placeholder="Neue Krypto-Notiz schreiben..."></textarea>
+                <button id="save-crypto-note" class="btn-primary">
+                  <i class="fas fa-save"></i>
+                  <span>Speichern</span>
+                </button>
+              </div>
+              <div class="crypto-notes-list" id="crypto-notes-list">
+                <!-- crypto notes will be dynamically inserted here -->
+              </div>
+            </div>
+            
+            <!-- Links Tab -->
+            <div class="crypto-tab-content" id="links-content">
+              <div class="crypto-link-add">
+                <input type="text" id="crypto-link-title" placeholder="Titel">
+                <input type="text" id="crypto-link-url" placeholder="URL">
+                <button id="save-crypto-link" class="btn-primary">
+                  <i class="fas fa-save"></i>
+                  <span>Speichern</span>
+                </button>
+                <button id="add-current-page-crypto" class="btn-secondary">
+                  <i class="fas fa-plus"></i>
+                  <span>Aktuelle Seite</span>
+                </button>
+              </div>
+              <div class="crypto-links-list" id="crypto-links-list">
+                <!-- crypto links will be dynamically inserted here -->
+              </div>
+            </div>
+            
+            <!-- Calculator Tab -->
+            <div class="crypto-tab-content" id="calculator-content">
+              <div class="crypto-calculator">
+                <div class="calculator-row">
+                  <input type="number" id="crypto-amount" placeholder="Menge">
+                  <select id="crypto-currency">
+                    <option value="BTC">Bitcoin (BTC)</option>
+                    <option value="ETH">Ethereum (ETH)</option>
+                    <option value="BNB">Binance Coin (BNB)</option>
+                    <option value="XRP">Ripple (XRP)</option>
+                    <option value="ADA">Cardano (ADA)</option>
+                    <option value="SOL">Solana (SOL)</option>
+                    <option value="DOT">Polkadot (DOT)</option>
+                  </select>
+                </div>
+                <div class="calculator-row">
+                  <input type="number" id="crypto-price" placeholder="Preis pro Einheit">
+                  <select id="fiat-currency">
+                    <option value="USD">US Dollar (USD)</option>
+                    <option value="EUR" selected>Euro (EUR)</option>
+                    <option value="GBP">Britisches Pfund (GBP)</option>
+                  </select>
+                </div>
+                <div class="calculator-result">
+                  <div class="result-label">Gesamtwert:</div>
+                  <div class="result-value" id="calculation-result">0.00</div>
+                </div>
+                <div class="calculator-actions">
+                  <button id="calculate-btn" class="btn-primary">
+                    <i class="fas fa-calculator"></i>
+                    <span>Berechnen</span>
+                  </button>
+                  <button id="save-calculation" class="btn-secondary">
+                    <i class="fas fa-save"></i>
+                    <span>Speichern</span>
+                  </button>
+                </div>
+                <div class="saved-calculations" id="saved-calculations">
+                  <!-- saved calculations will be dynamically inserted here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="sidebar-footer">
@@ -157,6 +287,51 @@
         <a href="https://github.com/webseitenland" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
       </div>
     </footer>
+  </div>
+
+  <!-- Portfolio Modal -->
+  <div class="portfolio-modal" id="portfolio-modal">
+    <div class="portfolio-modal-content">
+      <div class="portfolio-modal-header">
+        <h3 class="portfolio-modal-title">Position hinzufügen</h3>
+        <button class="portfolio-modal-close"><i class="fas fa-times"></i></button>
+      </div>
+      <form class="portfolio-form" id="portfolio-form">
+        <div class="form-group">
+          <label for="portfolio-crypto">Kryptowährung</label>
+          <select id="portfolio-crypto" required>
+            <option value="">Bitte auswählen</option>
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+            <option value="BNB">Binance Coin (BNB)</option>
+            <option value="XRP">Ripple (XRP)</option>
+            <option value="ADA">Cardano (ADA)</option>
+            <option value="SOL">Solana (SOL)</option>
+            <option value="DOT">Polkadot (DOT)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="portfolio-amount">Menge</label>
+          <input type="number" id="portfolio-amount" step="any" min="0" required placeholder="z.B. 0.5">
+        </div>
+        <div class="form-group">
+          <label for="portfolio-buy-price">Kaufpreis pro Einheit</label>
+          <input type="number" id="portfolio-buy-price" step="any" min="0" required placeholder="z.B. 50000">
+        </div>
+        <div class="form-group">
+          <label for="portfolio-buy-date">Kaufdatum</label>
+          <input type="date" id="portfolio-buy-date" required>
+        </div>
+        <div class="form-group">
+          <label for="portfolio-notes">Notizen (optional)</label>
+          <input type="text" id="portfolio-notes" placeholder="z.B. Kauf auf Binance">
+        </div>
+        <div class="portfolio-modal-actions">
+          <button type="button" class="btn-secondary" id="cancel-portfolio">Abbrechen</button>
+          <button type="submit" class="btn-primary" id="save-portfolio">Speichern</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script type="module" src="src/sidebar.js"></script>
